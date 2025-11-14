@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  {{> header}}
+  <main style="max-width:1100px;margin:2rem auto;padding:1rem;">
+    <h1>Clasificación</h1>
+    <ul class="product-list">
+      {{#each list}}
+        <li class="product-card">
+          <img src="{{this.inv_thumbnail}}" alt="{{this.inv_make}} {{this.inv_model}} mini">
+          <h2>{{this.inv_year}} {{this.inv_make}} {{this.inv_model}}</h2>
+          <p>{{this.inv_price}}</p>
+          <p><a href="/inventory/detail/{{this.inv_id}}">Ver detalle</a></p>
+        </li>
+      {{/each}}
+    </ul>
+  </main>
+  {{> footer}}
+</body>
+</html>

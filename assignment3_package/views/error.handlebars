@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{{status}} - Error</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  {{> header}}
+  <main style="max-width:900px;margin:2rem auto;padding:1rem;">
+    <h1>Error {{status}}</h1>
+    <p>{{message}}</p>
+    {{#if stack}}
+      <pre style="white-space:pre-wrap;background:#f8f8f8;padding:1rem;border-radius:6px;">{{stack}}</pre>
+    {{/if}}
+    <p><a href="/">Volver al inicio</a></p>
+  </main>
+  {{> footer}}
+</body>
+</html>

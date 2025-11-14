@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/styles/main.css" />
+</head>
+<body>
+  {{> header }}
+  <main class="detail-wrapper" role="main" aria-labelledby="vehicleTitle">
+    <div class="detail-grid" aria-live="polite">
+      <div class="detail-image">
+        <img src="{{vehicle.inv_image}}" alt="{{vehicle.inv_make}} {{vehicle.inv_model}} full view" />
+      </div>
+
+      <div class="detail-content">
+        <h1 id="vehicleTitle" class="vehicle-title">{{vehicle.inv_year}} {{vehicle.inv_make}} {{vehicle.inv_model}}</h1>
+        <p class="vehicle-detail__price">{{formattedPrice}}</p>
+        <p class="vehicle-detail__miles">Kilometraje: {{formattedMiles}} millas</p>
+
+        <div class="vehicle-additional">
+          {{{detailHTML}}}
+        </div>
+
+        <section aria-label="Detalles del vehículo">
+          <dl>
+            <div><dt>Marca</dt><dd>{{vehicle.inv_make}}</dd></div>
+            <div><dt>Modelo</dt><dd>{{vehicle.inv_model}}</dd></div>
+            <div><dt>Año</dt><dd>{{vehicle.inv_year}}</dd></div>
+            <div><dt>Precio</dt><dd>{{formattedPrice}}</dd></div>
+            <div><dt>Kilometraje</dt><dd>{{formattedMiles}} millas</dd></div>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </main>
+  {{> footer }}
+</body>
+</html>
