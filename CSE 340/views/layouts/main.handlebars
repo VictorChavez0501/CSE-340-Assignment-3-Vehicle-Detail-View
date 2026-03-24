@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-    {{{body}}}
+
+    <div id="wrapper">
+
+        <!-- HEADER -->
+        {{> header}}
+
+        <!-- MAIN CONTENT -->
+        <main>
+            {{{body}}}
+        </main>
+
+        <!-- FOOTER -->
+        {{> footer}}
+
+    </div>
+
 </body>
 </html>
