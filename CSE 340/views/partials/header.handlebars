@@ -15,10 +15,17 @@
   <nav aria-label="Main navigation">
     <ul class="nav-menu">
       <li><a href="/">Home</a></li>
-      <li><a href="/inventory/classification/1">Custom</a></li>
-      <li><a href="/inventory/classification/5">Sedan</a></li>
-      <li><a href="/inventory/classification/3">SUV</a></li>
-      <li><a href="/inventory/classification/4">Truck</a></li>
+
+      {{#if nav}}
+        {{#each nav}}
+          <li>
+            <a href="/inventory/classification/{{this.classification_id}}">
+              {{this.classification_name}}
+            </a>
+          </li>
+        {{/each}}
+      {{/if}}
+
     </ul>
   </nav>
 

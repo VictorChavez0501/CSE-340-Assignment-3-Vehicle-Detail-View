@@ -21,12 +21,24 @@ app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// 👉 NAV GLOBAL (para el header dinámico)
+const inventoryModel = require('./models/inventory-model');
+app.use(async (req, res, next) => {
+  try {
+    const nav = await inventoryModel.getClassifications();
+    res.locals.nav = nav;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Routers
 app.use('/', require('./routes/index'));
 app.use('/inventory', require('./routes/inventory'));
 app.use('/', require('./routes/misc'));
 
-// Error handlers (al final)
+// Error handlers
 const { notFoundHandler, globalErrorHandler } = require('./middleware/errorHandler');
 app.use(notFoundHandler);
 app.use(globalErrorHandler);

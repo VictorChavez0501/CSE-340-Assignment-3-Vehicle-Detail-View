@@ -1,38 +1,44 @@
-const inventoryModel = require('../models/inventory-model');
-const { buildVehicleDetailHTML, formatCurrency, formatNumber } = require('../utilities');
+const inventoryModel = require('../models/inventory-model')
 
 async function getClassificationList(req, res, next) {
   try {
-    const list = await inventoryModel.getAllForClassification();
-    res.render('inventory/classification', { title: 'Clasificación', list });
+    const list = await inventoryModel.getAllForClassification()
+    const nav = await inventoryModel.getClassifications()
+
+    res.render('inventory/classification', {
+      title: 'Clasificación',
+      list,
+      nav
+    })
   } catch (err) {
-    next(err);
+    next(err)
   }
 }
 
 async function getVehicleDetail(req, res, next) {
-  const invId = req.params.inv_id;
+  const invId = req.params.inv_id
+
   try {
-    const vehicle = await inventoryModel.getVehicleById(invId);
+    const vehicle = await inventoryModel.getVehicleById(invId)
+    const nav = await inventoryModel.getClassifications()
+
     if (!vehicle) {
-      const err = new Error('Vehículo no encontrado');
-      err.status = 404;
-      return next(err);
+      const err = new Error('Vehículo no encontrado')
+      err.status = 404
+      return next(err)
     }
-    const detailHTML = buildVehicleDetailHTML(vehicle);
+
     res.render('inventory/detail', {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       vehicle,
-      detailHTML,
-      formattedPrice: formatCurrency(vehicle.inv_price),
-      formattedMiles: formatNumber(vehicle.inv_miles),
-    });
+      nav
+    })
   } catch (err) {
-    next(err);
+    next(err)
   }
 }
 
 module.exports = {
   getClassificationList,
   getVehicleDetail,
-};
+}
