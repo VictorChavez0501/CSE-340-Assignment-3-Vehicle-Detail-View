@@ -3,7 +3,18 @@ const pool = require('../db/pool');
 // Obtener vehículo por ID
 async function getVehicleById(invId) {
   const sql = `
-    SELECT *
+    SELECT 
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
     FROM inventory
     WHERE inv_id = $1
   `;
@@ -14,7 +25,13 @@ async function getVehicleById(invId) {
 // Obtener vehículos por clasificación
 async function getVehiclesByClassificationId(classification_id) {
   const sql = `
-    SELECT *
+    SELECT 
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_thumbnail,
+      inv_price
     FROM inventory
     WHERE classification_id = $1
     ORDER BY inv_make, inv_model
@@ -23,7 +40,7 @@ async function getVehiclesByClassificationId(classification_id) {
   return rows;
 }
 
-// Obtener TODAS las clasificaciones (NAVBAR)
+// Obtener clasificaciones (NAV)
 async function getClassifications() {
   const sql = `
     SELECT classification_id, classification_name
