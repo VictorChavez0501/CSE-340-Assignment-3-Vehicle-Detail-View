@@ -1,40 +1,39 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <title>{{title}}</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="/styles/main.css" />
-</head>
-<body>
-  {{> header }}
-  <main class="detail-wrapper" role="main" aria-labelledby="vehicleTitle">
-    <div class="detail-grid" aria-live="polite">
-      <div class="detail-image">
-        <img src="{{vehicle.inv_image}}" alt="{{vehicle.inv_make}} {{vehicle.inv_model}} full view" />
-      </div>
+<div class="vehicle-detail-container">
 
-      <div class="detail-content">
-        <h1 id="vehicleTitle" class="vehicle-title">{{vehicle.inv_year}} {{vehicle.inv_make}} {{vehicle.inv_model}}</h1>
-        <p class="vehicle-detail__price">{{formattedPrice}}</p>
-        <p class="vehicle-detail__miles">Kilometraje: {{formattedMiles}} millas</p>
+  <div class="vehicle-detail-grid">
 
-        <div class="vehicle-additional">
-          {{{detailHTML}}}
-        </div>
-
-        <section aria-label="Detalles del vehículo">
-          <dl>
-            <div><dt>Marca</dt><dd>{{vehicle.inv_make}}</dd></div>
-            <div><dt>Modelo</dt><dd>{{vehicle.inv_model}}</dd></div>
-            <div><dt>Año</dt><dd>{{vehicle.inv_year}}</dd></div>
-            <div><dt>Precio</dt><dd>{{formattedPrice}}</dd></div>
-            <div><dt>Kilometraje</dt><dd>{{formattedMiles}} millas</dd></div>
-          </dl>
-        </section>
-      </div>
+    <!-- IMAGEN -->
+    <div class="vehicle-detail-image">
+      <img src="{{vehicle.inv_image}}" alt="{{vehicle.inv_make}} {{vehicle.inv_model}}">
     </div>
-  </main>
-  {{> footer }}
-</body>
-</html>
+
+    <!-- INFO -->
+    <div class="vehicle-detail-info">
+      <h1 class="vehicle-title">
+        {{vehicle.inv_year}} {{vehicle.inv_make}} {{vehicle.inv_model}}
+      </h1>
+
+      <p class="vehicle-price">{{formattedPrice}}</p>
+
+      <ul class="vehicle-specs">
+        <li><strong>Mileage:</strong> {{formattedMiles}} miles</li>
+        <li><strong>Color:</strong> {{vehicle.inv_color}}</li>
+      </ul>
+
+      <p class="vehicle-description">
+        {{vehicle.inv_description}}
+      </p>
+
+      <!-- BOTONES -->
+      <div class="vehicle-actions">
+        <button class="btn-primary">START MY PURCHASE</button>
+        <button class="btn-secondary">CONTACT US</button>
+        <button class="btn-secondary">SCHEDULE TEST DRIVE</button>
+        <button class="btn-secondary">APPLY FOR FINANCING</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
