@@ -310,3 +310,73 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* HERO MEJORADO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1100px;
+  border-radius: 5px;
+}
+
+.hero-text h2 {
+  color: #00a6c7;
+  font-size: 1.8rem;
+}
+
+.hero-text ul {
+  margin: 1rem 0;
+}
+
+.hero-text li {
+  margin-bottom: 0.4rem;
+}
+
+.hero-image img {
+  max-width: 450px;
+}
+
+/* REVIEWS + UPGRADES */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+/* REVIEWS BOX */
+.reviews {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
+
+/* UPGRADES */
+.upgrades {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
+
+.upgrade-item {
+  background: #00a6c7;
+  color: white;
+  padding: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
