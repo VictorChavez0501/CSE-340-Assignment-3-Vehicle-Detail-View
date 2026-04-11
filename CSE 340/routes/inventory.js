@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
+
 const inventoryController = require('../controllers/inventoryController');
+const favoritesController = require('../controllers/favoritesController');
+const { checkLogin } = require('../middleware/auth');
 
 // ===============================
 // CLASIFICACIÓN
@@ -19,19 +22,21 @@ router.get(
 );
 
 // ===============================
-// ⭐ FAVORITOS (NUEVO)
+// ⭐ FAVORITOS
 // ===============================
 
 // Guardar favorito
 router.get(
   '/favorite/:inv_id',
-  inventoryController.addFavorite
+  checkLogin,
+  favoritesController.addFavorite
 );
 
 // Ver favoritos
 router.get(
   '/favorites',
-  inventoryController.viewFavorites
+  checkLogin,
+  favoritesController.viewFavorites
 );
 
 module.exports = router;
