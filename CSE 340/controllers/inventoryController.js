@@ -45,42 +45,47 @@ async function getVehicleDetail(req, res, next) {
   }
 }
 
-// ===============================
 // ⭐ AGREGAR FAVORITO
-// ===============================
 async function addFavorite(req, res, next) {
   try {
-    const inv_id = req.params.inv_id
+    const account = res.locals.account;
 
-    // ⚠️ TEMPORAL (porque no tienes login completo)
-    const account_id = 1
+    if (!account) {
+      return res.redirect('/account/login');
+    }
 
-    await inventoryModel.addFavorite(account_id, inv_id)
+    const account_id = account.account_id;
+    const inv_id = req.params.inv_id;
 
-    res.redirect('/inventory/favorites')
+    await inventoryModel.addFavorite(account_id, inv_id);
+
+    res.redirect('/inventory/detail/' + inv_id);
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 
-// ===============================
 // ⭐ VER FAVORITOS
-// ===============================
 async function viewFavorites(req, res, next) {
   try {
-    // ⚠️ TEMPORAL
-    const account_id = 1
+    const account = res.locals.account;
 
-    const favorites = await inventoryModel.getFavoritesByUser(account_id)
-    const nav = await inventoryModel.getClassifications()
+    if (!account) {
+      return res.redirect('/account/login');
+    }
+
+    const account_id = account.account_id;
+
+    const favorites = await inventoryModel.getFavoritesByUser(account_id);
+    const nav = await inventoryModel.getClassifications();
 
     res.render('inventory/favorites', {
       title: 'My Favorites',
       favorites,
       nav
-    })
+    });
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 
