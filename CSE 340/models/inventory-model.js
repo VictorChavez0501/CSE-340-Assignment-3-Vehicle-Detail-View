@@ -1,6 +1,8 @@
 const pool = require('../db/pool');
 
-// Obtener vehículo por ID
+// ===============================
+// VEHÍCULO POR ID
+// ===============================
 async function getVehicleById(invId) {
   const sql = `
     SELECT 
@@ -22,7 +24,9 @@ async function getVehicleById(invId) {
   return rows[0];
 }
 
-// Obtener vehículos por clasificación
+// ===============================
+// VEHÍCULOS POR CLASIFICACIÓN
+// ===============================
 async function getVehiclesByClassificationId(classification_id) {
   const sql = `
     SELECT 
@@ -40,7 +44,9 @@ async function getVehiclesByClassificationId(classification_id) {
   return rows;
 }
 
-// Obtener clasificaciones (NAV)
+// ===============================
+// CLASIFICACIONES (NAVBAR)
+// ===============================
 async function getClassifications() {
   const sql = `
     SELECT classification_id, classification_name
@@ -51,8 +57,37 @@ async function getClassifications() {
   return rows;
 }
 
+// ===============================
+// ⭐ AGREGAR FAVORITO
+// ===============================
+async function addFavorite(account_id, inv_id) {
+  const sql = `
+    INSERT INTO favorites (account_id, inv_id)
+    VALUES ($1, $2)
+    ON CONFLICT (account_id, inv_id) DO NOTHING
+  `;
+  await pool.query(sql, [account_id, inv_id]);
+}
+
+// ===============================
+// ⭐ OBTENER FAVORITOS
+// ===============================
+async function getFavoritesByUser(account_id) {
+  const sql = `
+    SELECT i.*
+    FROM favorites f
+    JOIN inventory i ON f.inv_id = i.inv_id
+    WHERE f.account_id = $1
+    ORDER BY i.inv_make, i.inv_model
+  `;
+  const { rows } = await pool.query(sql, [account_id]);
+  return rows;
+}
+
 module.exports = {
   getVehicleById,
   getVehiclesByClassificationId,
   getClassifications,
+  addFavorite,
+  getFavoritesByUser,
 };

@@ -2,10 +2,36 @@ const express = require('express');
 const router = express.Router();
 const inventoryController = require('../controllers/inventoryController');
 
-// ✅ Lista por clasificación (dinámica)
-router.get('/classification/:classification_id', inventoryController.getClassificationList);
+// ===============================
+// CLASIFICACIÓN
+// ===============================
+router.get(
+  '/classification/:classification_id',
+  inventoryController.getClassificationList
+);
 
-// ✅ Detalle dinámico por inv_id
-router.get('/detail/:inv_id', inventoryController.getVehicleDetail);
+// ===============================
+// DETALLE VEHÍCULO
+// ===============================
+router.get(
+  '/detail/:inv_id',
+  inventoryController.getVehicleDetail
+);
+
+// ===============================
+// ⭐ FAVORITOS (NUEVO)
+// ===============================
+
+// Guardar favorito
+router.get(
+  '/favorite/:inv_id',
+  inventoryController.addFavorite
+);
+
+// Ver favoritos
+router.get(
+  '/favorites',
+  inventoryController.viewFavorites
+);
 
 module.exports = router;

@@ -1,5 +1,42 @@
-<h1>{{title}}</h1>
+<h1 class="vehicle-title">{{vehicle.inv_year}} {{vehicle.inv_make}} {{vehicle.inv_model}}</h1>
 
 <section class="vehicle-detail-container">
-  {{{detailHTML}}}
+
+  <div class="vehicle-detail-grid">
+
+    <!-- IMAGEN -->
+    <div class="vehicle-detail-image">
+      <img 
+        src="{{vehicle.inv_image}}" 
+        alt="{{vehicle.inv_make}} {{vehicle.inv_model}} image">
+    </div>
+
+    <!-- INFO -->
+    <div class="vehicle-detail-info">
+
+      <p class="vehicle-price">{{vehicle.inv_price}}</p>
+
+      <ul class="vehicle-specs">
+        <li><strong>Year:</strong> {{vehicle.inv_year}}</li>
+        <li><strong>Make:</strong> {{vehicle.inv_make}}</li>
+        <li><strong>Model:</strong> {{vehicle.inv_model}}</li>
+        <li><strong>Mileage:</strong> {{vehicle.inv_miles}} miles</li>
+        <li><strong>Color:</strong> {{vehicle.inv_color}}</li>
+      </ul>
+
+      <p class="vehicle-description">
+        {{vehicle.inv_description}}
+      </p>
+
+      <!-- ⭐ BOTÓN FAVORITO -->
+      <div class="vehicle-actions">
+        <a href="/inventory/favorite/{{vehicle.inv_id}}" class="btn-primary">
+          ⭐ Add to Favorites
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>

@@ -1,8 +1,12 @@
 const inventoryModel = require('../models/inventory-model')
 
+// ===============================
+// CLASIFICACIÓN
+// ===============================
 async function getClassificationList(req, res, next) {
   try {
-    const list = await inventoryModel.getAllForClassification()
+    const classification_id = req.params.classification_id
+    const list = await inventoryModel.getVehiclesByClassificationId(classification_id)
     const nav = await inventoryModel.getClassifications()
 
     res.render('inventory/classification', {
@@ -15,6 +19,9 @@ async function getClassificationList(req, res, next) {
   }
 }
 
+// ===============================
+// DETALLE VEHÍCULO
+// ===============================
 async function getVehicleDetail(req, res, next) {
   const invId = req.params.inv_id
 
@@ -38,7 +45,48 @@ async function getVehicleDetail(req, res, next) {
   }
 }
 
+// ===============================
+// ⭐ AGREGAR FAVORITO
+// ===============================
+async function addFavorite(req, res, next) {
+  try {
+    const inv_id = req.params.inv_id
+
+    // ⚠️ TEMPORAL (porque no tienes login completo)
+    const account_id = 1
+
+    await inventoryModel.addFavorite(account_id, inv_id)
+
+    res.redirect('/inventory/favorites')
+  } catch (err) {
+    next(err)
+  }
+}
+
+// ===============================
+// ⭐ VER FAVORITOS
+// ===============================
+async function viewFavorites(req, res, next) {
+  try {
+    // ⚠️ TEMPORAL
+    const account_id = 1
+
+    const favorites = await inventoryModel.getFavoritesByUser(account_id)
+    const nav = await inventoryModel.getClassifications()
+
+    res.render('inventory/favorites', {
+      title: 'My Favorites',
+      favorites,
+      nav
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   getClassificationList,
   getVehicleDetail,
+  addFavorite,
+  viewFavorites
 }
